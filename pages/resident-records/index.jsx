@@ -1,14 +1,43 @@
 import React from "react";
-import { Container, Button, Card, Form } from "react-bootstrap";
+import { Container, Button, Card, Form, Row } from "react-bootstrap";
 
 import { DashboardLayout } from "components/layouts";
+import { TableBuilder } from "components/tables";
 
 const ResidentRecordsPage = () => {
   const searchInputRef = React.useRef(null);
 
   React.useEffect(() => {
     searchInputRef.current.focus();
+
+    console.log(process.env.API_BASEURL);
   }, []);
+
+  const tableColumns = React.useMemo(
+    () => [
+      {
+        name: "Resident",
+        selector: (row) => row.name,
+        sortable: true,
+      },
+      {
+        name: "Age",
+        selector: (row) => row.name,
+        sortable: true,
+      },
+      {
+        name: "With Complaints",
+        selector: (row) => row.name,
+        sortable: true,
+      },
+      {
+        name: "Actions",
+        selector: (row) => row.name,
+        sortable: true,
+      },
+    ],
+    []
+  );
 
   return (
     <DashboardLayout title="Resident Records">
@@ -17,7 +46,7 @@ const ResidentRecordsPage = () => {
           <Button variant="info">Add New Entry</Button>
         </div>
 
-        <div className="col-md-4 d-flex">
+        <div className="col-sm-6 col-md-4 d-flex">
           <Form.Control
             type="text"
             placeholder="Search"
@@ -27,8 +56,10 @@ const ResidentRecordsPage = () => {
         </div>
       </Container>
 
-      <Card className="card-datatable shadow-sm">
-        <Card.Body>Datatable</Card.Body>
+      <Card className="card-datatable">
+        <Card.Body>
+          <TableBuilder columns={tableColumns} data={[]} />
+        </Card.Body>
       </Card>
     </DashboardLayout>
   );

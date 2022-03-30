@@ -7,6 +7,18 @@
         display: none !important;
       }
 
+      .header {
+        .d-flex {
+          p {
+            display: none !important;
+          }
+        }
+
+        .text-content {
+          display: none !important;
+        }
+      }
+
       .body {
         button {
           padding: 10px 0 !important;
@@ -23,6 +35,16 @@
           }
         }
       }
+    }
+  }
+}
+
+@media (max-width: 568px) {
+  .datatable-header {
+    display: block !important;
+
+    div {
+      margin-bottom: 15px;
     }
   }
 }

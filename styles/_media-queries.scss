@@ -1,0 +1,28 @@
+@media (max-width: 992px) {
+  .dashboard-layout {
+    .dashboard-sidebar {
+      width: 60px !important;
+
+      .title {
+        display: none !important;
+      }
+
+      .body {
+        button {
+          padding: 10px 0 !important;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .name {
+            display: none !important;
+          }
+
+          .icon {
+            margin-right: 0 !important;
+          }
+        }
+      }
+    }
+  }
+}

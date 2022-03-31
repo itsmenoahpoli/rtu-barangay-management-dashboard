@@ -20,15 +20,16 @@ const ResidentRecordsPage = () => {
   const router = useRouter();
   const searchInputRef = React.useRef(null);
 
+  const [search, setSearch] = React.useState("");
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
   const getResidentRecords = async (search) => {
     setLoading(true);
-    let residentRecordsData = await residentsRecordsService.getAll("");
+
+    let residentRecordsData = await residentsRecordsService.getAll(search);
 
     setData(residentRecordsData.data);
-
     setLoading(false);
   };
 
@@ -39,7 +40,7 @@ const ResidentRecordsPage = () => {
   };
 
   const handleSearch = async (search) => {
-    await getResidentRecords(search);
+    setSearch(search);
   };
 
   React.useEffect(() => {
@@ -47,10 +48,15 @@ const ResidentRecordsPage = () => {
     getResidentRecords();
   }, []);
 
+  React.useEffect(() => {
+    getResidentRecords(search);
+  }, [search]);
+
   const tableColumns = React.useMemo(
     () => [
       {
         name: "Resident",
+        grow: 2,
         selector: (row) => row.first_name,
         sortable: true,
         cell: (row) => (

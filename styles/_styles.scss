@@ -148,11 +148,18 @@ form {
 
 .swal2-container {
   .swal2-title {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .swal2-html-container {
-    font-size: 14px;
+    font-size: 13px;
+  }
+
+  .swal2-actions {
+    button {
+      background: $infoColor !important;
+      text-transform: uppercase;
+    }
   }
 }
 
@@ -172,7 +179,7 @@ form {
     border-top-left-radius: 8px;
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 15px;
 
     small {
       color: blue;

@@ -6,7 +6,6 @@ import {
   Form,
   FloatingLabel,
   Button,
-  Spinner,
 } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
@@ -20,38 +19,14 @@ export const ResidentRecordForm = (props) => {
     formState: { errors },
   } = useForm();
 
-  const [emailStatus, setEmailStatus] = React.useState("taken");
+  const [submitted, setSubmitted] = React.useState(false);
 
   const handleFormSubmit = async (values) => {
+    setSubmitted(true);
+
     await formFns.submitFormFn(values);
-  };
 
-  const handleValidateEmail = async (email) => {
-    console.log(email);
-  };
-
-  const renderErrorMessages = (errors) => {
-    console.log(errors);
-  };
-
-  const renderEmailValidIndicator = (emailStatus) => {
-    switch (emailStatus) {
-      case "pending":
-        return (
-          <small>
-            <Spinner animation="border" variant="info" size="sm" />
-          </small>
-        );
-
-      case "taken":
-        return <small className="text-danger">Already taken</small>;
-
-      case "valid":
-        return <small className="text-success">Available</small>;
-
-      default:
-        return <></>;
-    }
+    setSubmitted(false);
   };
 
   return (
@@ -59,8 +34,6 @@ export const ResidentRecordForm = (props) => {
       <div className="mb-4">
         <small className="text-sm text-muted">General Information</small>
       </div>
-
-      {errors ? renderErrorMessages(errors) : null}
 
       <Form onSubmit={handleSubmit(handleFormSubmit)}>
         <Row>
@@ -265,7 +238,12 @@ export const ResidentRecordForm = (props) => {
           </Col>
         </Row>
 
-        <Button type="submit" variant="success" className="mt-3">
+        <Button
+          type="submit"
+          variant="success"
+          className="mt-3"
+          disabled={submitted}
+        >
           ADD RECORD
         </Button>
       </Form>

@@ -52,6 +52,9 @@ export const TableBuilder = (props) => {
       progressPending={loading}
       progressComponent={<LoadingTableDataComponent />}
       noDataComponent={<EmptyTableDataComponent />}
+      responsive
+      highlightOnHover
+      selectableRows
       persistTableHead
       pagination
       paginationPerPage={25}

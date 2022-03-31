@@ -3,7 +3,7 @@
 ```bash
 git clone https://github.com/itsmenoahpoli/rtu-barangay-management-dashboard
 
-cd rtu-barangay-management-system-dashboard
+cd rtu-barangay-management-dashboard
 
 npm install
 

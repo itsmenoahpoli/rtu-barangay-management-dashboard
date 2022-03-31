@@ -59,6 +59,24 @@ button {
   border-radius: 5px !important;
 }
 
+.btn-group {
+  button {
+    color: #262626 !important;
+    background: none !important;
+    font-size: 12px !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  button.btn-edit {
+    color: $infoColor !important;
+  }
+
+  button.btn-delete {
+    color: $dangerColor !important;
+  }
+}
+
 button.btn-secondary {
   border: solid 1px #c9c9c9 !important;
 }
@@ -70,6 +88,13 @@ button.btn-secondary {
 
   .card-body {
     border-radius: 7px !important;
+  }
+}
+
+//
+.UserAvatar {
+  .UserAvatar--inner {
+    color: #fff !important;
   }
 }
 
@@ -156,6 +181,7 @@ button.btn-secondary {
   .dashboard-content {
     width: calc($sidebarWidth - 100%);
     overflow-y: auto;
+    padding-bottom: 150px !important;
 
     .dashboard-page-content-header {
       padding: 10px 15px !important;

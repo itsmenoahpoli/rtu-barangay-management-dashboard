@@ -7,7 +7,12 @@ const tableStyles = {
     style: {
       color: "#454545",
       fontSize: "13px",
-      textTransform: "uppercase",
+    },
+  },
+  cells: {
+    style: {
+      paddingTop: "15px",
+      paddingBottom: "15px",
     },
   },
 };

@@ -83,12 +83,12 @@ const ResidentRecordsPage = () => {
           ),
       },
       {
-        name: "Has Files",
+        name: "Certificate Files",
         selector: (row) => row.resident_complaints,
         sortable: true,
         cell: (row) =>
           row.resident_files.length === 0 ? (
-            <Button variant="link">View</Button>
+            <Button variant="link">View Files</Button>
           ) : (
             <>&mdash;</>
           ),
@@ -99,7 +99,7 @@ const ResidentRecordsPage = () => {
         sortable: true,
         cell: (row) => (
           <ButtonGroup>
-            <Button className="btn-edit">Edit</Button>
+            <Button className="btn-edit">View Profile</Button>
             <Button className="btn-delete">Remove</Button>
           </ButtonGroup>
         ),

@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import {
   Container,
   ButtonGroup,
@@ -16,6 +17,7 @@ import { ResidentRecordsService } from "lib/services";
 const residentsRecordsService = new ResidentRecordsService();
 
 const ResidentRecordsPage = () => {
+  const router = useRouter();
   const searchInputRef = React.useRef(null);
 
   const [data, setData] = React.useState([]);
@@ -99,8 +101,12 @@ const ResidentRecordsPage = () => {
         sortable: true,
         cell: (row) => (
           <ButtonGroup>
-            <Button className="btn-edit">View Profile</Button>
-            <Button className="btn-delete">Remove</Button>
+            <Button variant="info" className="btn-edit">
+              View Profile
+            </Button>
+            <Button variant="danger" className="btn-delete">
+              Remove
+            </Button>
           </ButtonGroup>
         ),
       },
@@ -112,7 +118,12 @@ const ResidentRecordsPage = () => {
     <DashboardLayout title="Resident Records">
       <Container fluid className="datatable-header">
         <div>
-          <Button variant="primary">Add New Entry</Button>
+          <Button
+            variant="primary"
+            onClick={() => router.push("/resident-records/new")}
+          >
+            Add New Entry
+          </Button>
 
           <Button variant="secondary">Export to CSV</Button>
         </div>

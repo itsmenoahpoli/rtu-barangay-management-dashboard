@@ -47,4 +47,21 @@
       margin-bottom: 15px;
     }
   }
+
+  form {
+    .row {
+      margin-bottom: 0 !important;
+
+      [class*="col-md"] {
+        .form-group {
+          .form-floating {
+            .form-control,
+            .form-select {
+              margin-bottom: 20px !important;
+            }
+          }
+        }
+      }
+    }
+  }
 }

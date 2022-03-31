@@ -54,18 +54,16 @@ body {
   }
 }
 
-button {
+button,
+a.btn {
   font-size: 13px !important;
-  border-radius: 5px !important;
+  border-radius: 7px !important;
 }
 
 .btn-group {
   button {
-    color: #262626 !important;
-    background: none !important;
-    font-size: 12px !important;
-    border: none !important;
-    border-radius: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
   }
 
   button.btn-edit {
@@ -91,10 +89,70 @@ button.btn-secondary {
   }
 }
 
+form {
+  .row {
+    margin-bottom: 20px;
+
+    .form-group {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+
+    small {
+      font-size: 11px !important;
+    }
+
+    small.text-danger {
+      font-size: 13px !important;
+      font-weight: normal;
+    }
+
+    .form-control,
+    .form-select,
+    .form-label,
+    .form-floating label {
+      font-size: 14px !important;
+    }
+
+    .field-validating-indicator {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .form-control:disabled,
+    .form-select:disabled {
+      cursor: not-allowed !important;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  button {
+    font-size: 14px !important;
+    padding: 10px 15px !important;
+  }
+}
+
 //
 .UserAvatar {
   .UserAvatar--inner {
     color: #fff !important;
+  }
+}
+
+.swal2-container {
+  .swal2-title {
+    font-size: 20px;
+  }
+
+  .swal2-html-container {
+    font-size: 14px;
   }
 }
 
@@ -104,6 +162,24 @@ button.btn-secondary {
   flex-direction: row;
   position: relative;
   overflow: hidden;
+
+  .copyright-container {
+    font-size: 13px;
+    background: #fff;
+    color: #262626;
+    padding: 10px;
+    // border: solid 1px #ddd;
+    border-top-left-radius: 8px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    small {
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
 
   .dashboard-sidebar,
   .dashboard-content {
@@ -181,7 +257,7 @@ button.btn-secondary {
   .dashboard-content {
     width: calc($sidebarWidth - 100%);
     overflow-y: auto;
-    padding-bottom: 150px !important;
+    padding-bottom: 80px !important;
 
     .dashboard-page-content-header {
       padding: 10px 15px !important;
@@ -191,37 +267,45 @@ button.btn-secondary {
       }
     }
 
-    .dashboard-page-content-body {
-      padding-top: 40px;
+    .dashboard-page-content {
+      .dashboard-page-content-body {
+        padding-top: 40px;
 
-      .dashboard-page-title {
-        color: $primaryColor;
-        font-weight: 600;
-        text-transform: uppercase;
-      }
+        zoom: 0.895;
 
-      .datatable-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        button {
-          margin-right: 10px;
+        .dashboard-page-title {
+          color: $primaryColor;
+          font-weight: 600;
+          text-transform: uppercase;
         }
 
-        input {
-          font-size: 14px;
-          padding: 15px;
-          border: 0 !important;
+        .datatable-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          button,
+          a.btn {
+            margin-right: 10px;
+          }
+
+          input {
+            font-size: 14px;
+            padding: 15px;
+            border: 0 !important;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08) !important;
+          }
+        }
+
+        .card,
+        .card-datatable {
           box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08) !important;
         }
-      }
 
-      .card-datatable {
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08) !important;
-
-        .card-body {
-          padding: 0 !important;
+        .card-datatable {
+          .card-body {
+            padding: 0 !important;
+          }
         }
       }
     }

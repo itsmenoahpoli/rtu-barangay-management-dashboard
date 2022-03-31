@@ -1,13 +1,21 @@
 import React from "react";
 import Head from "next/head";
+import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 import {
   DashboardSidebarNavigation,
   DashboardNavbarNavigation,
 } from "components/navigations";
 import { BreadcrumbBuilder } from "components/general";
+
+const toastOptions = {
+  style: {
+    fontSize: "12px",
+    color: "#252525",
+  },
+};
 
 export const DashboardLayout = (props) => {
   const { title, children } = props;
@@ -18,6 +26,10 @@ export const DashboardLayout = (props) => {
     router.push(url);
   };
 
+  const getCurrentYear = () => {
+    return new Date().getFullYear();
+  };
+
   return (
     <>
       <Head>
@@ -25,6 +37,8 @@ export const DashboardLayout = (props) => {
       </Head>
 
       <Container fluid className="dashboard-layout">
+        <Toaster toastOptions={toastOptions} />
+
         <DashboardSidebarNavigation handleNavigate={handleNavigate} />
 
         <Container fluid className="dashboard-content">
@@ -38,6 +52,11 @@ export const DashboardLayout = (props) => {
               {children}
             </Container>
           </Container>
+
+          <div className="copyright-container shadow-lg">
+            &#169;
+            <small>Baragay Pitogo Makati City {getCurrentYear()}</small>
+          </div>
         </Container>
       </Container>
     </>

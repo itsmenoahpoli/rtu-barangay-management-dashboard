@@ -5,10 +5,7 @@ import moment from "moment";
 export const BaseCertificateTemplate = (props) => {
   const { resident, type, purpose } = props;
 
-  console.log({ resident, type });
-
   const [currentDate] = React.useState(moment().format("MMMM D, YYYY"));
-  const [title, setTitle] = React.useState("");
 
   const getComputeResidentAge = (residentBirthdate) => {
     return new Date().getFullYear() - new Date(residentBirthdate).getFullYear();
@@ -151,7 +148,9 @@ export const BaseCertificateTemplate = (props) => {
       </Row>
 
       <Container fluid className="certificate-content-container col-10">
-        <h5 className="fw-bold text-center">{title || "CERTIFICATION"}</h5>
+        <h5 className="fw-bold text-center text-capitalize mb-5">
+          {type.replace("-", " ") || "CERTIFICATE"}
+        </h5>
 
         <p>To Whom It May Concern</p>
 
@@ -164,8 +163,11 @@ export const BaseCertificateTemplate = (props) => {
         <br />
         <br />
         <br />
-        <div className="col-sm-3 offset-sm-9">
-          <div className="pt-2" style={{ borderTop: "solid 1px #262626" }}>
+        <div className="col-sm-3 offset-sm-9 mt-4">
+          <div
+            className="text-center pt-2"
+            style={{ borderTop: "solid 1px #262626" }}
+          >
             <p className="fw-bold mb-0">Ives M. Ebrada</p>
             <small>Punong Barangay</small>
           </div>

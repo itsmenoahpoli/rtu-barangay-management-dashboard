@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  Container,
-  Form,
-  FloatingLabel,
-  Row,
-  Col,
-  Button,
-} from "react-bootstrap";
+import { Container, Form, FloatingLabel, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { FiCornerRightUp } from "react-icons/fi";
 import Pdf from "react-to-pdf";
 
 import { BaseCertificateTemplate } from "components/certificate-templates";
@@ -26,8 +20,13 @@ export const ResidentCertificateForm = (props) => {
   const [selectedResident, setSelectedResident] = React.useState("");
   const [selectedCertificateType, setSelectedCertificateType] =
     React.useState("");
+  const [certificateFilename, setCertificateFilename] = React.useState("");
   const [purpose, setPurpose] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
+
+  React.useEffect(() => {
+    generateFilename(selectedResident, selectedCertificateType);
+  }, [selectedResident, selectedCertificateType]);
 
   const handleFormSubmit = async (values) => {
     setSubmitted(true);
@@ -35,6 +34,13 @@ export const ResidentCertificateForm = (props) => {
     await formFns.submitFormFn(values);
 
     setSubmitted(false);
+  };
+
+  const generateFilename = (resident, certificateType) => {
+    const { first_name, last_name } = resident;
+
+    let residentFullname = `${first_name}-${last_name}`.toLowerCase();
+    setCertificateFilename(`${residentFullname}-${certificateType}.pdf`);
   };
 
   const setResidentData = (residentId) => {
@@ -127,23 +133,19 @@ export const ResidentCertificateForm = (props) => {
           </FloatingLabel>
         </Form.Group>
 
-        <Row>
-          <Col></Col>
-        </Row>
-
-        <div className="mb-1">
-          <small className="text-sm text-muted">Certificate Preview</small>
-        </div>
-
-        <div className="d-flex justify-content-center">
-          <div ref={certificateTemplateRef} style={{ width: "65%" }}>
-            <BaseCertificateTemplate
-              resident={selectedResident}
-              type={selectedCertificateType}
-              purpose={purpose}
+        <Form.Group className="form-group">
+          <FloatingLabel label="Certificate File">
+            <Form.Control
+              type="file"
+              {...register("file", { ...requiredValidation })}
             />
-          </div>
-        </div>
+          </FloatingLabel>
+
+          <p className="text-underline mt-2" style={{ fontSize: "13px" }}>
+            Generate the certificate file and then upload it here &nbsp;{" "}
+            <FiCornerRightUp />
+          </p>
+        </Form.Group>
 
         <Button
           type="submit"
@@ -153,14 +155,45 @@ export const ResidentCertificateForm = (props) => {
         >
           CREATE CERTIFICATE
         </Button>
-      </Form>
 
-      {/* <Pdf
-        targetRef={certificateTemplateRef}
-        filename="barangay-certificate-2022.pdf"
-      >
-        {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
-      </Pdf> */}
+        <hr />
+
+        <div className="my-2">
+          <small className="text-sm text-muted">Certificate Preview</small>
+
+          <div>
+            <Pdf
+              targetRef={certificateTemplateRef}
+              filename={certificateFilename}
+            >
+              {({ toPdf }) => (
+                <Button
+                  onClick={toPdf}
+                  variant="info"
+                  className="p-2"
+                  disabled={Boolean(
+                    selectedResident === "" ||
+                      selectedCertificateType === "" ||
+                      purpose === ""
+                  )}
+                >
+                  Download Certificate
+                </Button>
+              )}
+            </Pdf>
+          </div>
+        </div>
+
+        <div className="d-flex justify-content-center">
+          <div ref={certificateTemplateRef} style={{ width: "76%" }}>
+            <BaseCertificateTemplate
+              resident={selectedResident}
+              type={selectedCertificateType}
+              purpose={purpose}
+            />
+          </div>
+        </div>
+      </Form>
     </Container>
   );
 };

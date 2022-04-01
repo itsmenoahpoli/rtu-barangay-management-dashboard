@@ -162,7 +162,6 @@ export const BaseCertificateTemplate = (props) => {
 
         <br />
         <br />
-        <br />
         <div className="col-sm-3 offset-sm-9 mt-4">
           <div
             className="text-center pt-2"

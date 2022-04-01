@@ -52,6 +52,8 @@ export const TableBuilder = (props) => {
       progressPending={loading}
       progressComponent={<LoadingTableDataComponent />}
       noDataComponent={<EmptyTableDataComponent />}
+      fixedHeader
+      fixedHeaderScrollHeight="80vh"
       responsive
       highlightOnHover
       selectableRows

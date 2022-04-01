@@ -12,61 +12,31 @@ import UserAvatar from "react-user-avatar";
 
 import { DashboardLayout } from "components/layouts";
 import { TableBuilder } from "components/tables";
-import { ResidentRecordsService } from "lib/services";
 
-const residentsRecordsService = new ResidentRecordsService();
-
-const ResidentRecordsPage = () => {
+const ResidentComplaintsPage = () => {
   const router = useRouter();
-  const searchInputRef = React.useRef(null);
+  const searchInputRef = React.useState(null);
 
   const [search, setSearch] = React.useState("");
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
-  const getResidentRecords = async (search) => {
-    setLoading(true);
-
-    const { data } = await residentsRecordsService.getAll(search);
-
-    setData(data);
-    setLoading(false);
+  const getResidentComplaints = (search) => {
+    //
   };
 
-  const getResidentAge = (birthdate) => {
-    let dt = new Date();
-    // return dt.getYear() - new Date(birthdate).getYear();
-    return dt.getFullYear() - 1998;
-  };
-
-  const handleSearch = async (search) => {
+  const handleSearch = (search) => {
     setSearch(search);
-  };
-
-  const handleViewResident = (residentRecordId) => {
-    router.push(`'/resident-records/${residentRecordId}`);
-  };
-
-  const handleDeleteResident = async (residentRecordId) => {
-    if (confirm("Do you confirm to delete this record?")) {
-      setLoading(true);
-
-      await residentsRecordsService.deleteResidentRecordById(residentRecordId);
-      await getResidentRecords("");
-
-      setLoading(false);
-    }
   };
 
   React.useEffect(() => {
     searchInputRef.current.focus();
-
-    getResidentRecords("");
+    getResidentComplaints("");
   }, []);
 
   React.useEffect(() => {
     if (search !== "") {
-      getResidentRecords(search);
+      getResidentComplaints(search);
     }
   }, [search]);
 
@@ -79,11 +49,15 @@ const ResidentRecordsPage = () => {
         sortable: true,
         cell: (row) => (
           <Container fluid className="d-flex align-items-center">
-            <UserAvatar size={48} name={`${row.first_name} ${row.last_name}`} />
+            <UserAvatar
+              size={48}
+              name={`${row.resident.first_name} ${row.resident.last_name}`}
+            />
             &nbsp;&nbsp;&nbsp;&nbsp;
             <div className="pl-3">
               <p className="mb-0">
-                {row.first_name} {row.middle_name} {row.last_name}
+                {row.resident.first_name} {row.resident.middle_name}{" "}
+                {row.last_name}
               </p>
 
               <small className="text-muted">{row.email}</small>
@@ -92,32 +66,9 @@ const ResidentRecordsPage = () => {
         ),
       },
       {
-        name: "Age",
-        selector: (row) => row.name,
+        name: "Type",
+        selector: (row) => row.id,
         sortable: true,
-        cell: (row) => getResidentAge(row.birthdate),
-      },
-      {
-        name: "Has Complaints Reported",
-        selector: (row) => row.resident_complaints,
-        sortable: true,
-        cell: (row) =>
-          row.resident_complaints.length > 0 ? (
-            <Badge bg="danger">Record(s) found</Badge>
-          ) : (
-            <>&mdash;</>
-          ),
-      },
-      {
-        name: "Certificate Files",
-        selector: (row) => row.resident_complaints,
-        sortable: true,
-        cell: (row) =>
-          row.resident_files.length > 0 ? (
-            <Button variant="link">View Files</Button>
-          ) : (
-            <>&mdash;</>
-          ),
       },
       {
         name: "Actions",
@@ -147,14 +98,14 @@ const ResidentRecordsPage = () => {
   );
 
   return (
-    <DashboardLayout title="Resident Records">
+    <DashboardLayout title="Resident Complaints">
       <Container fluid className="datatable-header">
         <div>
           <Button
             variant="primary"
-            onClick={() => router.push("/resident-records/new")}
+            onClick={() => router.push("/resident-complaints/new")}
           >
-            Add New Entry
+            Create New Complaint
           </Button>
 
           <Button variant="secondary">Export to CSV</Button>
@@ -180,4 +131,4 @@ const ResidentRecordsPage = () => {
   );
 };
 
-export default ResidentRecordsPage;
+export default ResidentComplaintsPage;

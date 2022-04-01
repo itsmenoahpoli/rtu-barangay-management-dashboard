@@ -40,6 +40,12 @@
 }
 
 @media (max-width: 568px) {
+  .dashboard-layout {
+    .copyright-container {
+      display: none !important;
+    }
+  }
+
   .datatable-header {
     display: block !important;
 

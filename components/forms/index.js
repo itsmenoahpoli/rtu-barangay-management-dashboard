@@ -1,1 +1,4 @@
-export { ResidentRecordForm } from "components/forms/by-modules";
+export {
+  ResidentRecordForm,
+  ResidentCertificateForm,
+} from "components/forms/by-modules";

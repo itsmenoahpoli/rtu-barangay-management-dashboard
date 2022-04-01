@@ -264,7 +264,7 @@ form {
   .dashboard-content {
     width: calc($sidebarWidth - 100%);
     overflow-y: auto;
-    padding-bottom: 80px !important;
+    padding-bottom: 30px !important;
 
     .dashboard-page-content-header {
       padding: 10px 15px !important;
@@ -315,6 +315,32 @@ form {
           }
         }
       }
+    }
+  }
+}
+
+// CERTIFICATE TEMPLATES
+.certificate-container {
+  height: 100vh;
+  background: url("/assets/images/file-bg.png");
+  background-size: cover;
+  background-position: center;
+  padding-top: 50px !important;
+
+  .certificate-header-texts {
+    padding-top: 15px;
+
+    p {
+      font-weight: bold;
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .certificate-content-container {
+    padding-top: 50px !important;
+
+    p {
+      font-size: 18px !important;
     }
   }
 }

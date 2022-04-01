@@ -326,6 +326,7 @@ form {
   background-size: cover;
   background-position: center;
   padding-top: 50px !important;
+  position: relative;
 
   .certificate-header-texts {
     padding-top: 15px;
@@ -341,6 +342,17 @@ form {
 
     p {
       font-size: 16px !important;
+    }
+  }
+
+  .barangay-address {
+    width: 100%;
+    position: absolute;
+    bottom: 30px;
+    text-align: center;
+
+    small {
+      font-size: 13px;
     }
   }
 }

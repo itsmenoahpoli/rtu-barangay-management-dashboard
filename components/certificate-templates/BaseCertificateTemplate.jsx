@@ -171,6 +171,13 @@ export const BaseCertificateTemplate = (props) => {
           </div>
         </div>
       </Container>
+
+      <div className="barangay-address">
+        <small>
+          502 Cebu Street, Pitogo, Makati City*Tel. No’s:8313375/8825288*Email
+          add: barangay23pitogo@gmail.com
+        </small>
+      </div>
     </Container>
   );
 };

@@ -113,7 +113,7 @@ const ResidentRecordsPage = () => {
         selector: (row) => row.resident_complaints,
         sortable: true,
         cell: (row) =>
-          row.resident_files.length > 0 ? (
+          row.resident_certificates.length > 0 ? (
             <Button variant="link">View Files</Button>
           ) : (
             <>&mdash;</>

@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, Form, FloatingLabel, Button } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  FloatingLabel,
+  Row,
+  Col,
+  Button,
+} from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import Pdf from "react-to-pdf";
 
@@ -16,9 +23,10 @@ export const ResidentCertificateForm = (props) => {
     formState: { errors },
   } = useForm();
 
-  const [selectedResident, setSelectedResident] = React.useState(null);
+  const [selectedResident, setSelectedResident] = React.useState("");
   const [selectedCertificateType, setSelectedCertificateType] =
     React.useState("");
+  const [purpose, setPurpose] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
 
   const handleFormSubmit = async (values) => {
@@ -27,6 +35,12 @@ export const ResidentCertificateForm = (props) => {
     await formFns.submitFormFn(values);
 
     setSubmitted(false);
+  };
+
+  const setResidentData = (residentId) => {
+    let idx = residents.findIndex((r) => r.id === parseInt(residentId));
+
+    setSelectedResident(residents[idx]);
   };
 
   return (
@@ -46,6 +60,8 @@ export const ResidentCertificateForm = (props) => {
                   ? "border border-danger"
                   : ""
               }
+              defaultValue={selectedResident}
+              onInput={(e) => setResidentData(e.target.value)}
               {...register("resident_id", { ...requiredValidation })}
             >
               <option value="">Choose</option>
@@ -73,6 +89,7 @@ export const ResidentCertificateForm = (props) => {
                   ? "border border-danger"
                   : ""
               }
+              onInput={(e) => setSelectedCertificateType(e.target.value)}
               {...register("type", { ...requiredValidation })}
             >
               <option value="">Choose</option>
@@ -85,10 +102,10 @@ export const ResidentCertificateForm = (props) => {
                 Solo Parent Certificate
               </option>
               <option value="business-permit-certificate">
-                Business Certificate
+                Business Permit
               </option>
-              <option value="telecommunication-certificate">
-                Telecommunication Certificate
+              <option value="telecommunication-permit-certificate">
+                Telecommunication Permit
               </option>
             </Form.Select>
           </FloatingLabel>
@@ -97,6 +114,22 @@ export const ResidentCertificateForm = (props) => {
             <small className="text-danger">This field is required</small>
           )}
         </Form.Group>
+
+        <Form.Group className="form-group">
+          <FloatingLabel label="Purpose">
+            <Form.Control
+              type="text"
+              as="textarea"
+              style={{ height: "100px" }}
+              onInput={(e) => setPurpose(e.target.value)}
+              {...register("purpose", { ...requiredValidation })}
+            />
+          </FloatingLabel>
+        </Form.Group>
+
+        <Row>
+          <Col></Col>
+        </Row>
 
         <div className="mb-1">
           <small className="text-sm text-muted">Certificate Preview</small>
@@ -107,6 +140,7 @@ export const ResidentCertificateForm = (props) => {
             <BaseCertificateTemplate
               resident={selectedResident}
               type={selectedCertificateType}
+              purpose={purpose}
             />
           </div>
         </div>
@@ -121,12 +155,12 @@ export const ResidentCertificateForm = (props) => {
         </Button>
       </Form>
 
-      <Pdf
+      {/* <Pdf
         targetRef={certificateTemplateRef}
         filename="barangay-certificate-2022.pdf"
       >
         {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
-      </Pdf>
+      </Pdf> */}
     </Container>
   );
 };

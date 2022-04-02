@@ -31,16 +31,16 @@ const sidebarLinks = [
     url: "/resident-certificates",
     icon: <FiFileText />,
   },
-  {
-    name: "Telecom Permits",
-    url: "/business-permits?type=telecom",
-    icon: <FiPhoneCall />,
-  },
-  {
-    name: "Business Permits",
-    url: "/business-permits?type=telecom",
-    icon: <FiBriefcase />,
-  },
+  // {
+  //   name: "Telecom Permits",
+  //   url: "/business-permits?type=telecom",
+  //   icon: <FiPhoneCall />,
+  // },
+  // {
+  //   name: "Business Permits",
+  //   url: "/business-permits?type=telecom",
+  //   icon: <FiBriefcase />,
+  // },
 ];
 
 export const DashboardSidebarNavigation = (props) => {

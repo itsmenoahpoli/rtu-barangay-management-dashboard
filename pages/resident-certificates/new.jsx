@@ -15,8 +15,9 @@ const redidentCertificatesService = new ResidentCertificatesService();
 const ResidentCertificateNewPage = () => {
   const [residents, setResidents] = React.useState([]);
 
-  const handleCreateCertificate = async (resident) => {
-    await redidentCertificatesService.createCertificate(resident);
+  const handleCreateCertificate = async (certificate) => {
+    console.log(certificate);
+    await redidentCertificatesService.createCertificate(certificate);
   };
 
   const getResidents = async () => {

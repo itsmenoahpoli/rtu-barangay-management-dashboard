@@ -21,6 +21,7 @@ export const ResidentCertificateForm = (props) => {
   const [selectedCertificateType, setSelectedCertificateType] =
     React.useState("");
   const [certificateFilename, setCertificateFilename] = React.useState("");
+  const [certificateFile, setCertificateFile] = React.useState(null);
   const [purpose, setPurpose] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
 
@@ -29,9 +30,15 @@ export const ResidentCertificateForm = (props) => {
   }, [selectedResident, selectedCertificateType]);
 
   const handleFormSubmit = async (values) => {
-    setSubmitted(true);
+    // setSubmitted(true);
+    values.certificate_pdf_file = values.certificate_pdf_file[0];
 
-    await formFns.submitFormFn(values);
+    let formData = new FormData();
+    for (let d in values) {
+      formData.append(d, values[d]);
+    }
+
+    await formFns.submitFormFn(formData);
 
     setSubmitted(false);
   };
@@ -62,13 +69,15 @@ export const ResidentCertificateForm = (props) => {
               type="text"
               placeholder="Resident"
               className={
-                Boolean(errors && errors.resident_id?.type === "required")
+                Boolean(
+                  errors && errors.resident_record_id?.type === "required"
+                )
                   ? "border border-danger"
                   : ""
               }
               defaultValue={selectedResident}
               onInput={(e) => setResidentData(e.target.value)}
-              {...register("resident_id", { ...requiredValidation })}
+              {...register("resident_record_id", { ...requiredValidation })}
             >
               <option value="">Choose</option>
               {Boolean(residents.length > 0) &&
@@ -80,9 +89,9 @@ export const ResidentCertificateForm = (props) => {
             </Form.Select>
           </FloatingLabel>
 
-          {Boolean(errors && errors.resident_id?.type === "required") && (
-            <small className="text-danger">This field is required</small>
-          )}
+          {Boolean(
+            errors && errors.resident_record_id?.type === "required"
+          ) && <small className="text-danger">This field is required</small>}
         </Form.Group>
 
         <Form.Group className="form-group">
@@ -127,19 +136,39 @@ export const ResidentCertificateForm = (props) => {
               type="text"
               as="textarea"
               style={{ height: "100px" }}
+              className={
+                Boolean(errors && errors.purpose?.type === "required")
+                  ? "border border-danger"
+                  : ""
+              }
               onInput={(e) => setPurpose(e.target.value)}
               {...register("purpose", { ...requiredValidation })}
             />
           </FloatingLabel>
+
+          {Boolean(errors && errors.purpose?.type === "required") && (
+            <small className="text-danger">This field is required</small>
+          )}
         </Form.Group>
 
         <Form.Group className="form-group">
           <FloatingLabel label="Certificate File">
             <Form.Control
               type="file"
-              {...register("file", { ...requiredValidation })}
+              className={
+                Boolean(
+                  errors && errors.certificate_pdf_file?.type === "required"
+                )
+                  ? "border border-danger"
+                  : ""
+              }
+              {...register("certificate_pdf_file", { ...requiredValidation })}
             />
           </FloatingLabel>
+
+          {Boolean(
+            errors && errors.certificate_pdf_file?.type === "required"
+          ) && <small className="text-danger">This field is required</small>}
 
           <p className="text-underline mt-2" style={{ fontSize: "13px" }}>
             <span className="text-danger">IMPORTANT</span> &mdash; Download the

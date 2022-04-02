@@ -9,6 +9,7 @@ import {
   Badge,
 } from "react-bootstrap";
 import UserAvatar from "react-user-avatar";
+import moment from "moment";
 
 import { DashboardLayout } from "components/layouts";
 import { TableBuilder } from "components/tables";
@@ -37,12 +38,16 @@ const ResidentCertificatesPage = () => {
     setSearch(search);
   };
 
-  const handleViewCertificate = (certificate) => {
-    //
+  const handleViewCertificate = (certificateFileDirectoryURL) => {
+    window.open(certificateFileDirectoryURL);
   };
 
   const handlePrintCertificate = (certificate) => {
     //
+  };
+
+  const formatCertificateCreationDate = (date) => {
+    return moment(date).format("MMM DD, YYYY");
   };
 
   React.useEffect(() => {
@@ -67,13 +72,14 @@ const ResidentCertificatesPage = () => {
           <Container fluid className="d-flex align-items-center">
             <UserAvatar
               size={48}
-              name={`${row.resident.first_name} ${row.resident.last_name}`}
+              name={`${row.resident_record.first_name} ${row.resident_record.last_name}`}
             />
             &nbsp;&nbsp;&nbsp;&nbsp;
             <div className="pl-3">
               <p className="mb-0">
-                {row.resident.first_name} {row.resident.middle_name}{" "}
-                {row.last_name}
+                {row.resident_record.first_name}{" "}
+                {row.resident_record.middle_name}{" "}
+                {row.resident_record.last_name}
               </p>
 
               <small className="text-muted">{row.email}</small>
@@ -83,23 +89,14 @@ const ResidentCertificatesPage = () => {
       },
       {
         name: "Certificate Type",
-        selector: (row) => row.id,
-        sortable: true,
-      },
-      {
-        name: "Released",
-        selector: (row) => row.id,
-        sortable: true,
-      },
-      {
-        name: "Status",
-        selector: (row) => row.id,
+        selector: (row) => row.type,
         sortable: true,
       },
       {
         name: "Date Created",
-        selector: (row) => row.id,
+        selector: (row) => row.created_at,
         sortable: true,
+        cell: (row) => formatCertificateCreationDate(row.create_at),
       },
       {
         name: "Actions",
@@ -110,17 +107,17 @@ const ResidentCertificatesPage = () => {
             <Button
               variant="info"
               className="btn-edit"
-              onClick={() => handleViewCertificate(row)}
+              onClick={() => handleViewCertificate(row.file_directory)}
             >
               View
             </Button>
-            <Button
+            {/* <Button
               variant="danger"
               className="btn-delete"
               onClick={() => handlePrintCertificate(row)}
             >
               Print
-            </Button>
+            </Button> */}
           </ButtonGroup>
         ),
       },

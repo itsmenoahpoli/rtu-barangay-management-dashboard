@@ -128,13 +128,13 @@ const ResidentRecordsPage = () => {
             >
               View Profile
             </Button>
-            <Button
+            {/* <Button
               variant="danger"
               className="btn-delete"
               onClick={() => handleDeleteResident(row.id)}
             >
               Remove
-            </Button>
+            </Button> */}
           </ButtonGroup>
         ),
       },

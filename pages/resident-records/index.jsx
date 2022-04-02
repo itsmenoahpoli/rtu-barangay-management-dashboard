@@ -60,14 +60,10 @@ const ResidentRecordsPage = () => {
 
   React.useEffect(() => {
     searchInputRef.current.focus();
-
-    getResidentRecords("");
   }, []);
 
   React.useEffect(() => {
-    if (search !== "") {
-      getResidentRecords(search);
-    }
+    getResidentRecords(search);
   }, [search]);
 
   const tableColumns = React.useMemo(

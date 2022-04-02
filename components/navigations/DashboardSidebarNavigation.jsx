@@ -11,11 +11,11 @@ import {
 import moment from "moment";
 
 const sidebarLinks = [
-  {
-    name: "Dashboard",
-    url: "/",
-    icon: <FiHome />,
-  },
+  // {
+  //   name: "Dashboard",
+  //   url: "/",
+  //   icon: <FiHome />,
+  // },
   {
     name: "Resident Records",
     url: "/resident-records",

@@ -1,17 +1,14 @@
 import React from "react";
 import { useRouter } from "next/router";
-import {
-  Container,
-  ButtonGroup,
-  Button,
-  Card,
-  Form,
-  Badge,
-} from "react-bootstrap";
+import { Container, Button, Card, Form, Badge } from "react-bootstrap";
 import UserAvatar from "react-user-avatar";
+import moment from "moment";
 
 import { DashboardLayout } from "components/layouts";
 import { TableBuilder } from "components/tables";
+import { ResidentComplaintsService } from "lib/services";
+
+const residentComplaintService = new ResidentComplaintsService();
 
 const ResidentComplaintsPage = () => {
   const router = useRouter();
@@ -21,12 +18,25 @@ const ResidentComplaintsPage = () => {
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
-  const getResidentComplaints = (search) => {
-    //
+  const getResidentComplaints = async (search) => {
+    setLoading(true);
+
+    const { data } = await residentComplaintService.getAll(search);
+
+    setData(data);
+    setLoading(false);
   };
 
   const handleSearch = (search) => {
     setSearch(search);
+  };
+
+  const handleViewEvidence = (evidenceURL) => {
+    window.open(evidenceURL);
+  };
+
+  const formatEventDate = (date) => {
+    return moment(date).format("MMMM D, YYYY");
   };
 
   React.useEffect(() => {
@@ -44,20 +54,20 @@ const ResidentComplaintsPage = () => {
     () => [
       {
         name: "Resident",
-        grow: 2,
         selector: (row) => row.first_name,
         sortable: true,
         cell: (row) => (
           <Container fluid className="d-flex align-items-center">
             <UserAvatar
               size={48}
-              name={`${row.resident.first_name} ${row.resident.last_name}`}
+              name={`${row.resident_record.first_name} ${row.resident_record.last_name}`}
             />
             &nbsp;&nbsp;&nbsp;&nbsp;
             <div className="pl-3">
               <p className="mb-0">
-                {row.resident.first_name} {row.resident.middle_name}{" "}
-                {row.last_name}
+                {row.resident_record.first_name}{" "}
+                {row.resident_record.middle_name}{" "}
+                {row.resident_record.last_name}
               </p>
 
               <small className="text-muted">{row.email}</small>
@@ -66,32 +76,42 @@ const ResidentComplaintsPage = () => {
         ),
       },
       {
-        name: "Type",
-        selector: (row) => row.id,
+        name: "Details",
+        selector: (row) => row.details,
+        grow: 3,
         sortable: true,
       },
       {
-        name: "Actions",
-        selector: (row) => row.id,
+        name: "Type",
+        selector: (row) => row.type,
         sortable: true,
-        cell: (row) => (
-          <ButtonGroup>
-            <Button
-              variant="info"
-              className="btn-edit"
-              onClick={() => handleViewResident(row.id)}
-            >
-              View Profile
-            </Button>
-            <Button
-              variant="danger"
-              className="btn-delete"
-              onClick={() => handleDeleteResident(row.id)}
-            >
-              Remove
-            </Button>
-          </ButtonGroup>
-        ),
+        cell: (row) => <Badge bg="warning">{row.type}</Badge>,
+      },
+
+      {
+        name: "Date of Event",
+        selector: (row) => row.date_of_event,
+        sortable: true,
+        cell: (row) => formatEventDate(row.date_of_event),
+      },
+      {
+        name: "Actions",
+        selector: (row) => row.evidence_file_directory,
+        sortable: true,
+        cell: (row) => {
+          if (row.evidence_file_directory) {
+            return (
+              <Button
+                className="btn-edit"
+                onClick={() => handleViewEvidence(row.evidence_file_directory)}
+              >
+                View Evidence
+              </Button>
+            );
+          }
+
+          return <>&mdash;</>;
+        },
       },
     ],
     []

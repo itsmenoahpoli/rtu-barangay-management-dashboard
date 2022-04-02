@@ -38,8 +38,8 @@ export const BaseCertificateTemplate = (props) => {
       case "barangay-clearance":
         return (
           <p>
-            This is to certifies that the {residentFullname} , {residentAge}
-            Years of age, Filipino, whose signature and thumb amrks appear
+            This is to certifies that the {residentFullname} , {residentAge}{" "}
+            years of age, Filipino, whose signature and thumb amrks appear
             hereunder, is a bono fide resident of this Barangay, with postal
             address at {address_line1} Barangay Pitogo, Makati City.
             <br />

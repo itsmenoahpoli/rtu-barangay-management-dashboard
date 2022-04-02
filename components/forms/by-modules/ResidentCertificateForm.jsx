@@ -80,7 +80,7 @@ export const ResidentCertificateForm = (props) => {
             </Form.Select>
           </FloatingLabel>
 
-          {Boolean(errors && errors.email?.type === "required") && (
+          {Boolean(errors && errors.resident_id?.type === "required") && (
             <small className="text-danger">This field is required</small>
           )}
         </Form.Group>
@@ -142,7 +142,8 @@ export const ResidentCertificateForm = (props) => {
           </FloatingLabel>
 
           <p className="text-underline mt-2" style={{ fontSize: "13px" }}>
-            Generate the certificate file and then upload it here &nbsp;{" "}
+            <span className="text-danger">IMPORTANT</span> &mdash; Download the
+            generated certificate below and upload the file to here
             <FiCornerRightUp />
           </p>
         </Form.Group>
@@ -153,7 +154,7 @@ export const ResidentCertificateForm = (props) => {
           className="mt-3"
           disabled={submitted}
         >
-          CREATE CERTIFICATE
+          SAVE CERTIFICATE TO DATABASE
         </Button>
 
         <hr />

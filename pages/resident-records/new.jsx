@@ -6,11 +6,11 @@ import { ResidentRecordForm } from "components/forms";
 
 import { ResidentRecordsService } from "lib/services";
 
-const residentsRecordsService = new ResidentRecordsService();
+const residentRecordsService = new ResidentRecordsService();
 
 const ResidentRecordNewPage = () => {
   const handleRegisterResident = async (resident) => {
-    await residentsRecordsService.registerResident(resident);
+    await residentRecordsService.registerResident(resident);
   };
 
   return (

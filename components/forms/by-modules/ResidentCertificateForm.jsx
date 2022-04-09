@@ -215,7 +215,7 @@ export const ResidentCertificateForm = (props) => {
         </div>
 
         <div className="d-flex justify-content-center">
-          <div ref={certificateTemplateRef} style={{ width: "76%" }}>
+          <div ref={certificateTemplateRef} style={{ width: "65%" }}>
             <BaseCertificateTemplate
               resident={selectedResident}
               type={selectedCertificateType}

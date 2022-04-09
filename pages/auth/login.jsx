@@ -20,10 +20,12 @@ const LoginPage = () => {
     register,
     formState: { errors },
   } = useForm();
+  const [disabled, setDisabled] = React.useState(false);
 
   const handleFormSubmit = async (credentials) => {
-    console.log(credentials);
+    // setDisabled(true);
     await authService.userLogin(credentials);
+    // setDisabled(false);
   };
 
   return (
@@ -80,7 +82,12 @@ const LoginPage = () => {
                   </FloatingLabel>
                 </Form.Group>
 
-                <Button type="submit" variant="info" className="w-100">
+                <Button
+                  type="submit"
+                  variant="info"
+                  className="w-100"
+                  disabled={disabled}
+                >
                   LOG IN
                 </Button>
               </Form>

@@ -42,9 +42,7 @@ const ResidentRecordsPage = () => {
   };
 
   const handleViewResident = (residentRecordId) => {
-    if (typeof window !== undefined) {
-      window.open(`/resident-records/${residentRecordId}`);
-    }
+    router.push("/resident-records/" + residentRecordId);
   };
 
   React.useEffect(() => {
@@ -131,8 +129,6 @@ const ResidentRecordsPage = () => {
           >
             Add New Entry
           </Button>
-
-          <Button variant="secondary">Export to CSV</Button>
         </div>
 
         <div className="col-sm-6 col-md-4 d-flex">

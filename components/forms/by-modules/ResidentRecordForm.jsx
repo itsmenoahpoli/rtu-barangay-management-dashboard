@@ -99,6 +99,7 @@ export const ResidentRecordForm = (props) => {
             <Form.Control
               type="text"
               placeholder="E-mail"
+              defaultValue={resident?.email || ""}
               className={
                 Boolean(errors && errors.email?.type === "required")
                   ? "border border-danger"
@@ -120,6 +121,7 @@ export const ResidentRecordForm = (props) => {
                 <Form.Control
                   type="text"
                   placeholder="Mobile Number"
+                  defaultValue={resident?.mobile_number || ""}
                   className={
                     Boolean(errors && errors.mobile_number?.type === "required")
                       ? "border border-danger"
@@ -141,6 +143,7 @@ export const ResidentRecordForm = (props) => {
                 <Form.Control
                   type="text"
                   placeholder="Landline Number"
+                  defaultValue={resident?.landline || ""}
                   className={
                     Boolean(errors && errors.landline?.type === "required")
                       ? "border border-danger"
@@ -162,6 +165,7 @@ export const ResidentRecordForm = (props) => {
             <Form.Control
               type="date"
               placeholder="Birthdate"
+              defaultValue={resident?.birthdate || ""}
               className={
                 Boolean(errors && errors.birthdate?.type === "required")
                   ? "border border-danger"
@@ -182,6 +186,7 @@ export const ResidentRecordForm = (props) => {
               type="text"
               as="textarea"
               placeholder="Address Line 1"
+              defaultValue={resident?.address_line1 || ""}
               className={
                 Boolean(errors && errors.address_line1?.type === "required")
                   ? "border border-danger"
@@ -202,6 +207,7 @@ export const ResidentRecordForm = (props) => {
             <Form.Control
               type="text"
               as="textarea"
+              defaultValue={resident?.address_line2 || ""}
               placeholder="Address Line 2 (Optional)"
               style={{ height: "90px" }}
               {...register("address_line2")}

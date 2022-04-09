@@ -11,11 +11,11 @@ import {
 import moment from "moment";
 
 const sidebarLinks = [
-  {
-    name: "Dashboard",
-    url: "/",
-    icon: <FiHome />,
-  },
+  // {
+  //   name: "Dashboard",
+  //   url: "/",
+  //   icon: <FiHome />,
+  // },
   {
     name: "Resident Records",
     url: "/resident-records",
@@ -35,16 +35,6 @@ const sidebarLinks = [
     name: "Resident Certificate Requests",
     url: "/resident-certificate-requests",
     icon: <FiFileText />,
-  },
-  {
-    name: "Telecom Permits",
-    url: "/business-permits?type=telecom",
-    icon: <FiPhoneCall />,
-  },
-  {
-    name: "Business Permits",
-    url: "/business-permits?type=telecom",
-    icon: <FiBriefcase />,
   },
 ];
 

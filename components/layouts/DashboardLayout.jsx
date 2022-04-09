@@ -19,6 +19,11 @@ const toastOptions = {
 
 export const DashboardLayout = (props) => {
   const { title, children } = props;
+  const [isAuthenticated] = React.useState(
+    typeof window !== "undefined"
+      ? Boolean(localStorage.getItem("authToken") !== null)
+      : false
+  );
 
   let router = useRouter();
 
@@ -46,6 +51,13 @@ export const DashboardLayout = (props) => {
     }
   }, []);
 
+  if (!isAuthenticated)
+    return (
+      <Container fluid>
+        <p>Redirecting ...</p>
+      </Container>
+    );
+
   return (
     <>
       <Head>
@@ -53,8 +65,6 @@ export const DashboardLayout = (props) => {
       </Head>
 
       <Container fluid className="dashboard-layout">
-        <Toaster toastOptions={toastOptions} />
-
         <DashboardSidebarNavigation
           handleNavigate={handleNavigate}
           handleLogout={handleLogout}

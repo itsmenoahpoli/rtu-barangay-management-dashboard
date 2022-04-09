@@ -127,8 +127,6 @@ const ResidentComplaintsPage = () => {
           >
             Create New Complaint
           </Button>
-
-          <Button variant="secondary">Export to CSV</Button>
         </div>
 
         <div className="col-sm-6 col-md-4 d-flex">

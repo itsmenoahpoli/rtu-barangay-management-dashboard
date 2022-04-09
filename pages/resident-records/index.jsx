@@ -14,7 +14,7 @@ import { DashboardLayout } from "components/layouts";
 import { TableBuilder } from "components/tables";
 import { ResidentRecordsService } from "lib/services";
 
-const residentsRecordsService = new ResidentRecordsService();
+const residentRecordsService = new ResidentRecordsService();
 
 const ResidentRecordsPage = () => {
   const router = useRouter();
@@ -27,16 +27,14 @@ const ResidentRecordsPage = () => {
   const getResidentRecords = async (search) => {
     setLoading(true);
 
-    const { data } = await residentsRecordsService.getAll(search);
+    const { data } = await residentRecordsService.getAll(search);
 
     setData(data);
     setLoading(false);
   };
 
   const getResidentAge = (birthdate) => {
-    let dt = new Date();
-    // return dt.getYear() - new Date(birthdate).getYear();
-    return dt.getFullYear() - 1998;
+    return new Date().getYear() - new Date(birthdate).getYear();
   };
 
   const handleSearch = async (search) => {
@@ -44,17 +42,8 @@ const ResidentRecordsPage = () => {
   };
 
   const handleViewResident = (residentRecordId) => {
-    router.push(`'/resident-records/${residentRecordId}`);
-  };
-
-  const handleDeleteResident = async (residentRecordId) => {
-    if (confirm("Do you confirm to delete this record?")) {
-      setLoading(true);
-
-      await residentsRecordsService.deleteResidentRecordById(residentRecordId);
-      await getResidentRecords("");
-
-      setLoading(false);
+    if (typeof window !== undefined) {
+      window.open(`/resident-records/${residentRecordId}`);
     }
   };
 
@@ -95,22 +84,12 @@ const ResidentRecordsPage = () => {
       },
       {
         name: "Has Complaints Reported",
+        grow: 1,
         selector: (row) => row.resident_complaints,
         sortable: true,
         cell: (row) =>
           row.resident_complaints.length > 0 ? (
             <Badge bg="danger">Record(s) found</Badge>
-          ) : (
-            <>&mdash;</>
-          ),
-      },
-      {
-        name: "Certificate Files",
-        selector: (row) => row.resident_complaints,
-        sortable: true,
-        cell: (row) =>
-          row.resident_certificates.length > 0 ? (
-            <Button variant="link">View Files</Button>
           ) : (
             <>&mdash;</>
           ),

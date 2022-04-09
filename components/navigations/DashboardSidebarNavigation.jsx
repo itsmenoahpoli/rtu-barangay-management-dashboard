@@ -11,11 +11,11 @@ import {
 import moment from "moment";
 
 const sidebarLinks = [
-  // {
-  //   name: "Dashboard",
-  //   url: "/",
-  //   icon: <FiHome />,
-  // },
+  {
+    name: "Dashboard",
+    url: "/",
+    icon: <FiHome />,
+  },
   {
     name: "Resident Records",
     url: "/resident-records",
@@ -31,20 +31,25 @@ const sidebarLinks = [
     url: "/resident-certificates",
     icon: <FiFileText />,
   },
-  // {
-  //   name: "Telecom Permits",
-  //   url: "/business-permits?type=telecom",
-  //   icon: <FiPhoneCall />,
-  // },
-  // {
-  //   name: "Business Permits",
-  //   url: "/business-permits?type=telecom",
-  //   icon: <FiBriefcase />,
-  // },
+  {
+    name: "Resident Certificate Requests",
+    url: "/resident-certificate-requests",
+    icon: <FiFileText />,
+  },
+  {
+    name: "Telecom Permits",
+    url: "/business-permits?type=telecom",
+    icon: <FiPhoneCall />,
+  },
+  {
+    name: "Business Permits",
+    url: "/business-permits?type=telecom",
+    icon: <FiBriefcase />,
+  },
 ];
 
 export const DashboardSidebarNavigation = (props) => {
-  const { handleNavigate } = props;
+  const { handleNavigate, handleLogout } = props;
 
   const [collapsible, setCollapsible] = React.useState(true);
 
@@ -76,7 +81,11 @@ export const DashboardSidebarNavigation = (props) => {
           <p className="mb-0">
             User Role &mdash; <Badge bg="danger">ADMIN</Badge>
           </p>
-          <p className="mb-0">{getCurrentDatetime()}</p>
+          <p className="mb-3">{getCurrentDatetime()}</p>
+
+          <Button variant="warning" onClick={handleLogout}>
+            Log Out
+          </Button>
         </Container>
       </Container>
 

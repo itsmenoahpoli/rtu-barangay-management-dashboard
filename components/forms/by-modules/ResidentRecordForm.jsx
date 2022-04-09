@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 const requiredValidation = { required: true };
 
 export const ResidentRecordForm = (props) => {
-  const { formFns } = props;
+  const { resident, type, formFns } = props;
   const {
     handleSubmit,
     register,
@@ -43,6 +43,7 @@ export const ResidentRecordForm = (props) => {
                 <Form.Control
                   type="text"
                   placeholder="First Name"
+                  defaultValue={resident?.first_name || ""}
                   className={
                     Boolean(errors && errors.first_name?.type === "required")
                       ? "border border-danger"
@@ -63,6 +64,7 @@ export const ResidentRecordForm = (props) => {
               <FloatingLabel label="Middle Name (Optional)">
                 <Form.Control
                   type="text"
+                  defaultValue={resident?.middle_name || ""}
                   placeholder="Middle Name (Optional)"
                 />
               </FloatingLabel>
@@ -75,6 +77,7 @@ export const ResidentRecordForm = (props) => {
                 <Form.Control
                   type="text"
                   placeholder="Last Name"
+                  defaultValue={resident?.last_name || ""}
                   className={
                     Boolean(errors && errors.last_name?.type === "required")
                       ? "border border-danger"
@@ -244,7 +247,7 @@ export const ResidentRecordForm = (props) => {
           className="mt-3"
           disabled={submitted}
         >
-          ADD RECORD
+          {type !== "edit" ? "ADD" : "UPDATE"} RECORD
         </Button>
       </Form>
     </Container>

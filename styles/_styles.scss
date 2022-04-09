@@ -356,3 +356,28 @@ form {
     }
   }
 }
+
+// AUTH CONTAINER
+.auth-container {
+  height: 100vh;
+  background: $primaryColor;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .card {
+    background: none !important;
+    margin-top: 10%;
+
+    .card-body {
+      img {
+        margin-bottom: 30px;
+      }
+
+      h4,
+      p {
+        color: #fff !important;
+      }
+    }
+  }
+}

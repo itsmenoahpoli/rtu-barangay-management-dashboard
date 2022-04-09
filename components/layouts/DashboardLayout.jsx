@@ -26,9 +26,25 @@ export const DashboardLayout = (props) => {
     router.push(url);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
+
+    router.replace("/auth/login");
+  };
+
   const getCurrentYear = () => {
     return new Date().getFullYear();
   };
+
+  React.useEffect(() => {
+    if (
+      localStorage.getItem("authToken") === null &&
+      localStorage.getItem("user") === null
+    ) {
+      window.location.replace("/auth/login");
+    }
+  }, []);
 
   return (
     <>
@@ -39,7 +55,10 @@ export const DashboardLayout = (props) => {
       <Container fluid className="dashboard-layout">
         <Toaster toastOptions={toastOptions} />
 
-        <DashboardSidebarNavigation handleNavigate={handleNavigate} />
+        <DashboardSidebarNavigation
+          handleNavigate={handleNavigate}
+          handleLogout={handleLogout}
+        />
 
         <Container fluid className="dashboard-content">
           <Container fluid className="dashboard-page-content">

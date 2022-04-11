@@ -119,7 +119,7 @@ export const ResidentRecordForm = (props) => {
             <Form.Group className="form-group">
               <FloatingLabel label="Mobile Number">
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder="Mobile Number"
                   defaultValue={resident?.mobile_number || ""}
                   className={
@@ -128,6 +128,7 @@ export const ResidentRecordForm = (props) => {
                       : ""
                   }
                   {...register("mobile_number", { ...requiredValidation })}
+                  onKeyDown={(e) => e.key === "e" && e.preventDefault()}
                 />
               </FloatingLabel>
 
@@ -141,7 +142,7 @@ export const ResidentRecordForm = (props) => {
             <Form.Group className="form-group">
               <FloatingLabel label="Landline Number">
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder="Landline Number"
                   defaultValue={resident?.landline || ""}
                   className={
@@ -150,6 +151,7 @@ export const ResidentRecordForm = (props) => {
                       : ""
                   }
                   {...register("landline", { ...requiredValidation })}
+                  onKeyDown={(e) => e.key === "e" && e.preventDefault()}
                 />
               </FloatingLabel>
 

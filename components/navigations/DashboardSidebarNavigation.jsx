@@ -31,11 +31,11 @@ const sidebarLinks = [
     url: "/resident-certificates",
     icon: <FiFileText />,
   },
-  {
-    name: "Resident Certificate Requests",
-    url: "/resident-certificate-requests",
-    icon: <FiFileText />,
-  },
+  // {
+  //   name: "Resident Certificate Requests",
+  //   url: "/resident-certificate-requests",
+  //   icon: <FiFileText />,
+  // },
 ];
 
 export const DashboardSidebarNavigation = (props) => {
